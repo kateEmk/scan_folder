@@ -1,8 +1,9 @@
-pub mod prelude;
-pub mod parsing;
-pub mod db;
-pub mod compare_logic;
+use scan_folder::lib::*;
+use scan_folder::lib::parsing::scan_folder;
+
 
 fn main() {
     println!("Hello, world!");
+
+    println!("{:?}",scan_folder(".", true));
 }

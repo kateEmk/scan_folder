@@ -2,3 +2,4 @@
 Cargo.lock
 .idea
 .DbObject
+.DS_Store
