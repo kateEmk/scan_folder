@@ -3,12 +3,13 @@ use std::path::Path;
 use std::ffi::OsStr;
 use std::fs;
 use std::fs::{DirEntry, File};
+use serde::{Serialize, Deserialize};
 use std::time::{Duration, SystemTime, UNIX_EPOCH};
 
 use crate::lib::*;
 
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct DirObjInfo {
     obj_name: String,
     is_folder: bool,
@@ -27,7 +28,8 @@ pub fn scan_folder(path: &str, is_recursive: bool) -> Vec<DirObjInfo> {
             let mut objects: Vec<DirObjInfo> = vec![];
             let obj_file_name = obj.file_name();
             if metadata.is_dir() && is_recursive {
-                objects = _scan(obj_file_name.to_str().unwrap(), true);
+                let dir = format!("{}/{}", path, obj_file_name.to_str().unwrap());
+                objects = _scan(dir.as_str(), true);
             }
             let dir_object = DirObjInfo {
                 obj_name: obj_file_name.into_string().unwrap(),
@@ -45,3 +47,4 @@ pub fn scan_folder(path: &str, is_recursive: bool) -> Vec<DirObjInfo> {
     }
     _scan(path, is_recursive)
 }
+
