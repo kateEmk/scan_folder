@@ -1,23 +1,14 @@
 use std::borrow::Borrow;
-use std::path::Path;
 use std::ffi::OsStr;
 use std::fs;
 use std::fs::{DirEntry, File};
-use serde::{Serialize, Deserialize};
+use std::path::Path;
 use std::time::{Duration, SystemTime, UNIX_EPOCH};
 
+use serde::{Deserialize, Serialize};
+
 use crate::lib::*;
-
-
-#[derive(Debug, Clone, Serialize, Deserialize)]
-pub struct DirObjInfo {
-    obj_name: String,
-    is_folder: bool,
-    size_bytes: u64,
-    created_at: u64,
-    last_modified_at: u64,
-    objects: Vec<DirObjInfo>,
-}
+use crate::scanning::models::DirObjInfo;
 
 pub fn scan_folder(path: &str, is_recursive: bool) -> Vec<DirObjInfo> {
     pub fn _scan(path: &str, is_recursive: bool) -> Vec<DirObjInfo> {
