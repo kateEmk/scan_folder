@@ -1,9 +1,6 @@
-use std::ptr::slice_from_raw_parts;
-
-use mongodb::{Client, ClientSession, Collection, Database};
+use mongodb::{Client, Collection, Database};
 use mongodb::bson::doc;
-use mongodb::options::{FindOneOptions, FindOptions};
-use serde::{Deserialize, Serialize};
+use mongodb::options::FindOneOptions;
 
 use crate::lib::*;
 use crate::scanning::models::{DirInfo, DirInfoInMongo};
@@ -11,7 +8,7 @@ use crate::scanning::models::{DirInfo, DirInfoInMongo};
 pub async fn get_mongo_client(uri: &str) -> Result<Client, ServiceError> {
     match Client::with_uri_str(uri).await {
         Ok(client) => Ok(client),
-        Err(e) => Err(ServiceError::FailedToCreateDB),
+        Err(_e) => Err(ServiceError::FailedToCreateDB),
     }
 }
 
@@ -46,7 +43,7 @@ pub async fn insert_doc(coll: Collection<DirInfoInMongo>, doc: DirInfo) -> Resul
     };
 
     match coll.clone_with_type::<DirInfoInMongo>().insert_one(dir_info_in_mongo, None).await {
-        Ok(coll) => Ok(()),
+        Ok(_coll) => Ok(()),
         _ => Err(ServiceError::FailedToFoundCollection),
     }
 }

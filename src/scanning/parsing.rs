@@ -1,14 +1,7 @@
-use std::borrow::Borrow;
-use std::ffi::OsStr;
 use std::fs;
-use std::fs::{DirEntry, File};
-use std::path::Path;
-use std::time::{Duration, SystemTime, UNIX_EPOCH};
-
-use serde::{Deserialize, Serialize};
+use std::time::UNIX_EPOCH;
 
 use crate::lib::*;
-use crate::scanning::models::DirObjInfo;
 
 pub fn scan_folder(path: &str, is_recursive: bool) -> Vec<DirObjInfo> {
     pub fn _scan(path: &str, is_recursive: bool) -> Vec<DirObjInfo> {

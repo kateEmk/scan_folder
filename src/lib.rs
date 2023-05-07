@@ -5,6 +5,7 @@ extern crate core;
 
 pub mod utils;
 pub mod scanning;
+pub mod cli;
 
 pub mod lib {
     pub use crate::scanning::compare_logic::*;

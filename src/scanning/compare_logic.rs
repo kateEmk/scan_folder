@@ -1,5 +1,4 @@
 use std::collections::HashSet;
-use std::fmt::Display;
 use std::ops::Deref;
 
 use mongodb::Collection;
