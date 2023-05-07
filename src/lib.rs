@@ -8,6 +8,7 @@ pub mod scanning;
 
 pub mod lib {
     pub use crate::scanning::compare_logic::*;
+    pub use crate::scanning::db::*;
     pub use crate::scanning::models::*;
     pub use crate::scanning::parsing::*;
     pub use crate::utils::asserts::*;

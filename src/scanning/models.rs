@@ -1,6 +1,6 @@
 use serde::{Deserialize, Serialize};
 
-#[derive(Debug, Clone, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize, Eq, PartialEq, Hash)]
 pub struct DirObjInfo {
     pub obj_name: String,
     pub is_folder: bool,
@@ -9,6 +9,7 @@ pub struct DirObjInfo {
     pub last_modified_at: u64,
     pub objects: Vec<DirObjInfo>,
 }
+
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct DirInfoInMongo {
@@ -37,6 +38,22 @@ impl DirInfo {
         DirInfo {
             dir_name,
             info,
+        }
+    }
+}
+
+
+#[derive(Clone)]
+pub enum DiffMode {
+    New,
+    Deleted,
+}
+
+impl DiffMode {
+    pub fn to_str(&self) -> &str {
+        match self {
+            DiffMode::New => "+",
+            DiffMode::Deleted => "-"
         }
     }
 }
